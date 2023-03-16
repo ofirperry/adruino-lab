@@ -1,0 +1,33 @@
+#include <Adafruit_NeoPixel.h>
+
+#define PIN        6 // Which pin on the Arduino is connected to the NeoPixels?
+
+#define NUMPIXELS 8 //// How many NeoPixels are attached to the Arduino? 
+
+Adafruit_NeoPixel pixels(NUMPIXELS, PIN, NEO_GRB + NEO_KHZ800); 
+
+void setup() {
+
+  pixels.begin();
+  pixels.setBrightness(30); // brightness of the light
+}
+
+void loop() {
+  pixels.clear(); // Set all pixel colors to 'off'
+
+    pixels.setPixelColor(7, pixels.Color(255, 0, 0));// set pixel 7 to color red 
+    pixels.show();// show color red
+   delay(2000);
+   pixels.setPixelColor(6, pixels.Color(255, 255, 0));// set pixel 6 to color yellow 
+   pixels.show();// show color yellow
+   delay(2000);
+   pixels.clear();// clear all the colors, the neopixel is slear
+   delay(2000);
+    pixels.setPixelColor(5, pixels.Color(0, 255, 0)); // set pixel 5 to color green 
+    pixels.show();// show color green
+    delay(2000);
+   pixels.clear();// clear all the colors, the neopixel is slear
+   pixels.setPixelColor(6, pixels.Color(255, 255, 0));// set pixel 6 to color yellow 
+   pixels.show();// show color yellow
+   delay(2000);
+   pixels.clear();
