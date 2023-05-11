@@ -1,0 +1,60 @@
+int IN1_PIN_MOTOR1 = 2;
+int IN2_PIN_MOTOR1 = 4;
+int IN1_PIN_MOTOR2 = 5;
+int IN2_PIN_MOTOR2 = 7;
+
+
+int EN_PIN_MOTOR1 = 3;
+int EN_PIN_MOTOR2 = 6;
+
+void setup() {
+  // put your setup code here, to run once:
+  pinMode(IN1_PIN_MOTOR1, OUTPUT);
+  pinMode(IN2_PIN_MOTOR1, OUTPUT);
+  pinMode(IN1_PIN_MOTOR2, OUTPUT);
+  pinMode(IN2_PIN_MOTOR1, OUTPUT);
+
+  pinMode(EN_PIN_MOTOR1, OUTPUT);
+  pinMode(EN_PIN_MOTOR2, OUTPUT);
+}
+
+void Motor (int dir, int Power, int Motor_number){
+if ( Motor_number==1){ // left motor= 1
+
+if ( dir==1){
+    digitalWrite(IN1_PIN_MOTOR1, HIGH);
+    digitalWrite(IN2_PIN_MOTOR1, LOW);
+ }
+ else {
+   digitalWrite(IN1_PIN_MOTOR1, LOW);
+    digitalWrite(IN2_PIN_MOTOR1, HIGH);
+ }
+  analogWrite(EN_PIN_MOTOR1, Power);
+}
+
+}
+else{
+ if ( Motor_number==2)\\ right motor
+
+ if (dir==1){
+   digitalWrite(IN1_PIN_MOTOR2, HIGH);
+   digitalWrite(IN2_PIN_MOTOR2, LOW);
+ }
+ else{
+    digitalWrite(IN1_PIN_MOTOR2, LOW);
+   digitalWrite(IN2_PIN_MOTOR2, HIGH);  
+ }
+ analogWrite(EN_PIN_MOTOR2, Power);   
+ }
+
+}
+
+void loop() {
+  // Move forward
+ Motor(1,220,2);
+ Motor(1,220,1);
+ delay(2000);
+ Motor(1,0,2);  //stop 
+ Motor(1,0,1);
+
+}
