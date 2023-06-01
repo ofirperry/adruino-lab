@@ -1,0 +1,85 @@
+/* havatzelet 1.0
+20230510 ofir motor tank fanction
+20230513 ofir update function- Motor, MoveTank, Baseball
+*/
+
+#include "clicli.h"
+clicli mycli;  
+
+int IN1_PIN_MOTOR1 = 2; // in1
+int IN2_PIN_MOTOR1 = 4; // in2
+int IN1_PIN_MOTOR2 = 5; // in3
+int IN2_PIN_MOTOR2 = 7; // in4
+int flag = 0 ; 
+
+int EN_PIN_MOTOR1 = 3; // R motor
+int EN_PIN_MOTOR2 = 6; // 
+
+void setup() {
+  // put your setup code here, to run once:
+  pinMode(IN1_PIN_MOTOR1, OUTPUT);
+  pinMode(IN2_PIN_MOTOR1, OUTPUT);
+  pinMode(IN1_PIN_MOTOR2, OUTPUT);
+  pinMode(IN2_PIN_MOTOR2, OUTPUT);
+
+  pinMode(EN_PIN_MOTOR1, OUTPUT);
+  pinMode(EN_PIN_MOTOR2, OUTPUT);
+
+    mycli.begin();
+}
+
+void Motor (int Power, int Motor_number){
+ if ( Motor_number==1){ // right motor= 1
+
+ if (Power>0) {  // forword r motor
+    digitalWrite(IN1_PIN_MOTOR1, HIGH); // r motor 
+    digitalWrite(IN2_PIN_MOTOR1, LOW); // r motor
+     }
+ else { // backword r motor
+    digitalWrite(IN1_PIN_MOTOR1, LOW); // r motor
+    digitalWrite(IN2_PIN_MOTOR1, HIGH); // r motor
+    }
+  analogWrite(EN_PIN_MOTOR1, abs(Power));
+}
+
+else {
+      if ( Motor_number==2) // left motor
+          {
+            if (Power>0){ // forword L motor
+              digitalWrite(IN1_PIN_MOTOR2, HIGH);
+              digitalWrite(IN2_PIN_MOTOR2, LOW);
+              }
+            else{ // backword L motor
+                digitalWrite(IN1_PIN_MOTOR2, LOW);
+              digitalWrite(IN2_PIN_MOTOR2, HIGH);  
+            }
+      analogWrite(EN_PIN_MOTOR2, abs (Power));   
+      }
+    }
+}   
+
+void MoveTank (int power_L ,int power_R){
+    Motor(map(power_L,-100,100,-255,255) ,2 );
+    Motor(map(power_R,-100,100,-255,255) ,1 );
+    }
+
+void Baseball () {
+  if (flag ==0){
+    for (int i=0;i<4;i++)
+        {
+        MoveTank(50,50);
+        delay(2000);
+        MoveTank(50,0);
+        delay(700);
+      }
+      flag =1;
+  }
+}
+
+void loop() {
+  Baseball ();
+
+  mycli.run();
+}
+
+
